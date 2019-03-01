@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+<body>
+    <ul id="ul1"></ul>
+   
+    <script>
+//         var object = {
+//             username : 'chen',
+//             age : 18
+//         }
+// // get的方式下
+//         var app = null;
+//         var data =  'username = ' + object.username + '&age =' + object.age +'&date=' +　new Date().getDate();
+//         if(window.XLMHttpRequest){
+//             app = new XMLHttpRequest();
+//         }
+//         // }else{
+//             // app = new ActiveXObject('Microsoft.XMLHTTP');
+//         // }
+//         app.open('GET','./ajax.txt ' + '?' +  data   ,true);
+//         app.send();
+//         app.onreadystatechange = function (){
+//             if(app.readyState == 4){
+//                 if(app.status == 200){
+//                     // console.log(app.responseText)
+//                 }
+//             }
+//         }
+// //post-----------------------------------------------------------------------------
+//         if(window.XMLHttpRequest){
+//             app = new XMLHttpRequest();
+//         }else{
+//             app = ActiveXObject();
+//         }
+//         app.open('POST','./getPics',true);
+//         // app.sendRequestHeader('Context-');
+//         app.setRequestHeader('Context-type','application/x-www-form-urlencode');
+//         app.send(data)
+//         app.onreadystatechange = function (){
+//             if(app.readyState == 4){
+//                 if(app.status == 200){
+//                     showList(app.responseText)
+//                 }
+//             }
+//         }
+
+//         function showList(ajax){
+//             var date = JSON.parse(ajax);
+//             var ul = document.getElementById('ul1');
+            
+//             date.forEach(function(item,index){
+//                 var li = document.createElement('li');
+//                 var a1 = document.createElement('a');
+//                 var a2 = document.createElement('a');
+//                 a1.innerText = item.date,
+//                 a2.innerText = item.little,
+//                 li.appendChlid(a1);
+//                 li.appendChild(a2);
+//                 ul.appendChild(li);
+
+//             })
+
+//         }
+function ajax(method, url ,data, flag,callback){
+    var app = null;
+    if(window.XMLHttpRequest){
+        app = new XMLHttpRequest();
+    
+    }else{
+        app = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    if(method == 'GET'){
+        app.open('GET', url+ '?' + data, flag);
+        app.send();
+    }else if(method == 'POST'){
+        app.open('POST', url , flag);
+        app.setRequestHeader('Context-type','application-www-form-urlencode');
+        app.send(data);
+    }
+    app.onreadystatechange = function (){
+        if(app.readyState == 4){
+            if(app.status == 200){
+                callback(app.responseText);
+            }
+        }
+    }
+}
+
+ajax('GET','./ajax.txt',true, ' ', aa);
+
+function aa(data){
+    console.log(data)
+}
+
+    </script>
+    
+    
+</body>
+</html>
